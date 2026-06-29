@@ -1,0 +1,30 @@
+{
+  "name": "headless-astro",
+  "version": "4.0.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cniklas/headless-astro.git"
+  },
+  "author": "Christian Niklas",
+  "license": "MIT",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "format": "prettier --write src/"
+  },
+  "dependencies": {
+    "astro": "^7.0.3"
+  },
+  "devDependencies": {
+    "@unocss/astro": "^66.7.0",
+    "@unocss/reset": "^66.7.0",
+    "prettier-plugin-astro": "^0.14.1",
+    "prettier-plugin-tailwindcss": "^0.8.0",
+    "unocss": "^66.7.0"
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  }
+}

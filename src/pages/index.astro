@@ -1,0 +1,30 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import { getHomePage } from '@/utils/api'
+
+const page = await getHomePage()
+const { slug, title, modified, content } = page
+---
+
+<Layout home {slug} {title} footer>
+	<div class="content-wrapper">
+		<h1 class="content-title">
+			{title}
+		</h1>
+		<div class="content-update">
+			aktualisiert am {modified}
+		</div>
+
+		<div id="content" class="pt-9 pb-6 lg:pt-10" set:html={content} />
+
+		<div class="flex justify-center py-6">
+			<img
+				src="https://api.netlify.com/api/v1/badges/13a06c8c-d55d-455c-ba19-e24dcc607c53/deploy-status"
+				width="118"
+				height="20"
+				alt=""
+				loading="lazy"
+			/>
+		</div>
+	</div>
+</Layout>
