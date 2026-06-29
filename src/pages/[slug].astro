@@ -1,0 +1,28 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import { getAllExceptHomePage } from '@/utils/api'
+
+export async function getStaticPaths() {
+	const pages = await getAllExceptHomePage()
+	return pages.map(page => ({
+		params: { slug: page.slug },
+		props: { page },
+	}))
+}
+
+const { page } = Astro.props
+const { slug, title, modified, content } = page
+---
+
+<Layout {slug} {title} footer>
+	<div class="content-wrapper">
+		<h1 class="content-title">
+			{title}
+		</h1>
+		<div class="content-update">
+			aktualisiert am {modified}
+		</div>
+
+		<div id="content" class="pt-9 pb-6 lg:pt-10" set:html={content} />
+	</div>
+</Layout>
