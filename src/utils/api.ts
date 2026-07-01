@@ -19,17 +19,17 @@ const _getPages = async () => {
 	if (pages.length) return pages
 
 	const response = await _fetchFromKirby()
-	response.forEach(({ modified, order, renderedContent, slug, tableData, title }) => {
+	response.forEach(({ modified, order, renderedContent, slug, tableData, title }, i) => {
 		pages.push({
 			title,
 			content: _processContent({ tableData, renderedContent }),
 			modified: formatDate(modified),
 			order,
 			slug,
-			isHome: order === 1,
+			isHome: i === 0,
 		})
 	})
-	pages.sort((a, b) => (a.isHome ? -1 : b.isHome ? 1 : (a.order ?? Infinity) - (b.order ?? Infinity)))
+	// pages.sort((a, b) => (a.isHome ? -1 : b.isHome ? 1 : (a.order ?? Infinity) - (b.order ?? Infinity)))
 
 	return pages
 }
