@@ -25,7 +25,7 @@ const _getPages = async () => {
 			content: _processContent({ tableData, renderedContent }),
 			modified: formatDate(modified),
 			order,
-			slug,
+			slug: i === 0 ? '' : slug,
 			isHome: i === 0,
 		})
 	})
