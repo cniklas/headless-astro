@@ -25,13 +25,103 @@ body {
 	background-color: light-dark(var(--tmtGray-100), oklch(17.25% 0.0165 284.53));
 }
 
+.header {
+	@apply fixed top-0 z-10 w-full lg:static;
+	background-color: white;
+	/* = `shadow` */
+	box-shadow:
+		0 1px 3px hsl(0 0% 0% / 10%),
+		0 1px 2px -1px hsl(0 0% 0% / 10%);
+
+	@media (prefers-color-scheme: dark) {
+		/* = `shadow-md` */
+		box-shadow:
+			0 4px 6px -1px hsl(0 0% 0% / 40%),
+			0 2px 4px -1px hsl(0 0% 0% / 46%);
+	}
+}
+
+@supports (background-color: light-dark(white, black)) {
+	.header {
+		background-color: light-dark(var(--white), var(--tmtGray-900));
+	}
+}
+
+.site-name {
+	@apply text-xl font-bold;
+	color: light-dark(var(--tmtGray-900), var(--tmtGray-400));
+}
+
+.nav-button {
+	@apply ml-auto flex h-7.5 w-9.5 appearance-none items-center justify-center rounded border lg:hidden;
+	border-color: var(--tmtGray-600);
+	color: var(--tmtGray-500);
+}
+
+@media (hover: hover) and (pointer: fine) {
+	.nav-button:hover {
+		@apply border-teal-500;
+		color: light-dark(var(--tmtGray-900), var(--tmtGray-300));
+	}
+}
+
+@media not all and (min-width: 64em) {
+	/* https://nemzes.net/posts/animating-height-auto/ */
+	.nav {
+		--duration: 240ms;
+		width: 100%;
+		display: grid;
+		grid-template-rows: 0fr;
+		overflow-y: clip;
+		transition: grid-template-rows var(--duration) cubic-bezier(0.4, 0, 0.2, 1);
+
+		[aria-expanded='true'] + & {
+			grid-template-rows: 1fr;
+		}
+	}
+
+	.nav-list {
+		min-height: 0;
+		visibility: hidden;
+		opacity: 0;
+		transition:
+			visibility var(--duration) allow-discrete,
+			opacity var(--duration) cubic-bezier(0.4, 0, 0.2, 1);
+
+		[aria-expanded='true'] + :where(.nav) > & {
+			visibility: unset;
+			opacity: unset;
+		}
+	}
+}
+
+.nav-item {
+	@apply block py-2 lg:inline-block lg:px-2;
+	color: light-dark(var(--tmtGray-650), var(--tmtGray-500));
+
+	&:is([aria-current='page'], :focus-visible) {
+		color: light-dark(var(--tmtGray-900), var(--tmtGray-300));
+	}
+
+	&[aria-current='page'] {
+		@apply font-bold dark:font-semibold;
+	}
+
+	@media (hover: hover) and (pointer: fine) {
+		&:hover {
+			color: light-dark(var(--tmtGray-900), var(--tmtGray-300));
+			text-decoration-line: underline;
+		}
+	}
+}
+
 .content-wrapper {
 	@apply px-4;
 	color: light-dark(var(--tmtGray-800), var(--tmtGray-400));
 }
 
 .content-title {
-	@apply pt-3 pb-1 text-center text-3xl/normal font-bold text-balance break-words md:pb-2 md:text-4xl/normal lg:pt-6 lg:break-normal dark:font-semibold;
+	@apply <lg:break-words pt-3 pb-1 text-center text-3xl/normal font-bold text-balance md:pb-2 md:text-4xl/normal lg:pt-6 dark:font-semibold;
 	color: light-dark(var(--tmtGray-900), var(--tmtGray-300));
 }
 
@@ -41,7 +131,7 @@ body {
 }
 
 .table-wrapper {
-	@apply -mx-4 lg:mx-0 lg:overflow-x-auto;
+	@apply <lg:-mx-4 lg:overflow-x-auto;
 }
 
 /* >= 1440 */
@@ -62,21 +152,18 @@ table {
 	}
 }
 
-th,
-td {
+:is(th, td) {
 	@apply px-3 py-2;
 }
 
-thead th,
-tfoot th {
+:is(thead, tfoot) th {
 	font-weight: 600;
 	text-align: center;
 	vertical-align: bottom;
 	white-space: nowrap;
 }
 
-tbody th,
-tbody td {
+tbody :is(th, td) {
 	border-width: 1px;
 	border-color: light-dark(var(--tmtGray-300), var(--tmtGray-700));
 	vertical-align: top;
@@ -97,7 +184,7 @@ td a {
 }
 
 /* < 1024 */
-@media (max-width: 63.9375em) {
+@media not all and (min-width: 64em) {
 	table {
 		overflow: clip;
 	}
@@ -107,8 +194,7 @@ td a {
 		border-color: var(--tmtGray-300);
 	}
 
-	tbody th,
-	tbody td {
+	tbody :is(th, td) {
 		@apply border-0 px-4 py-0.5;
 	}
 
@@ -146,13 +232,9 @@ td a {
 }
 
 .calendar-full-height {
-	height: calc(100vh - 5rem);
 	height: calc(100dvh - 5rem);
-}
 
-@media (min-width: 64em) {
-	.calendar-full-height {
-		height: calc(100vh - 7.5rem);
+	@media (min-width: 64em) {
 		height: calc(100dvh - 7.5rem);
 	}
 }

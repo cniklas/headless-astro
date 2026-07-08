@@ -1,6 +1,20 @@
 import { defineConfig, presetMini, transformerDirectives } from 'unocss'
 
+/**
+ * sm: 640px
+ * md: 768px
+ * lg: 1024px
+ * xl: 1280px
+ * 2xl: 1536px
+ */
 export default defineConfig({
+	theme: {
+		breakpoints: {
+			md: '48em',
+			lg: '64em',
+		},
+	},
+
 	// custom CSS
 	// missing in presetMini
 	rules: [

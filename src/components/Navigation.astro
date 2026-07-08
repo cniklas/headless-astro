@@ -11,17 +11,17 @@ const navigation = await buildNavigation()
 const LOGIN_URL = `${KIRBY_URL}/panel`
 ---
 
-<div class="mx-auto flex flex-wrap items-center py-3 lg:max-w-4xl">
-	<a class="site-name" href="/">
+<div class="<lg:px-4 mx-auto flex flex-wrap items-center py-3 lg:max-w-4xl">
+	<a class="site-name" href="/" aria-current={!slug ? 'page' : undefined}>
 		{SITE_TITLE}
 	</a>
 
 	<button
 		type="button"
-		class="menu-button"
-		id="js-menu-button"
+		class="nav-button"
+		id="js-nav-button"
 		aria-expanded="false"
-		aria-controls="js-menu"
+		aria-controls="js-nav"
 		aria-label="Navigation öffnen / schließen"
 	>
 		<svg
@@ -36,16 +36,12 @@ const LOGIN_URL = `${KIRBY_URL}/panel`
 		</svg>
 	</button>
 
-	<nav id="js-menu" class="menu">
-		<ul class="items-center justify-end gap-x-3 lg:flex">
+	<nav id="js-nav" class="nav grow">
+		<ul class="nav-list items-center justify-end gap-x-3 lg:flex">
 			{
 				navigation.map(page => (
-					<li class:list={[{ 'lg:hidden': page.isHome }]}>
-						<a
-							class="menu-item"
-							href={`/${page.isHome ? '' : page.slug}`}
-							aria-current={page.slug === slug ? 'page' : null}
-						>
+					<li class:list={{ 'mt-2 lg:hidden': page.isHome }}>
+						<a class="nav-item" href={page.slug} aria-current={page.slug === slug ? 'page' : undefined}>
 							{page.title}
 						</a>
 					</li>
@@ -53,7 +49,7 @@ const LOGIN_URL = `${KIRBY_URL}/panel`
 			}
 
 			<li>
-				<a class="menu-item" href={LOGIN_URL}> Login </a>
+				<a class="nav-item" href={LOGIN_URL}> Login </a>
 			</li>
 		</ul>
 	</nav>
@@ -61,7 +57,7 @@ const LOGIN_URL = `${KIRBY_URL}/panel`
 
 <script>
 	let clicked = false
-	const button = document.querySelector<HTMLButtonElement>('#js-menu-button')
+	const button = document.querySelector<HTMLButtonElement>('#js-nav-button')
 
 	const toggleNav = () => {
 		if (clicked) return
@@ -78,53 +74,3 @@ const LOGIN_URL = `${KIRBY_URL}/panel`
 		if (e.persisted) button?.setAttribute('aria-expanded', 'false')
 	})
 </script>
-
-<style is:global>
-	.site-name {
-		@apply ml-4 text-xl font-bold lg:ml-0;
-		color: light-dark(var(--tmtGray-900), var(--tmtGray-400));
-	}
-
-	.menu-button {
-		@apply mr-4 ml-auto flex h-7.5 w-9.5 appearance-none items-center justify-center rounded border lg:hidden;
-		border-color: var(--tmtGray-600);
-		color: var(--tmtGray-500);
-	}
-
-	@media (hover: hover) and (pointer: fine) {
-		.menu-button:hover {
-			@apply border-teal-500;
-			color: light-dark(var(--tmtGray-900), var(--tmtGray-300));
-		}
-	}
-
-	.menu {
-		@apply z-20 mt-2 w-full grow lg:mt-0 lg:block lg:w-auto;
-		display: none;
-	}
-
-	[aria-expanded='true'] + .menu {
-		display: block;
-	}
-
-	.menu-item {
-		@apply block px-4 py-2 lg:inline-block lg:px-2;
-		color: light-dark(var(--tmtGray-650), var(--tmtGray-500));
-	}
-
-	.menu-item[aria-current='page'] {
-		@apply font-bold dark:font-semibold;
-		color: light-dark(var(--tmtGray-900), var(--tmtGray-300));
-	}
-
-	@media (hover: hover) and (pointer: fine) {
-		.menu-item:hover {
-			color: light-dark(var(--tmtGray-900), var(--tmtGray-300));
-			text-decoration-line: underline;
-		}
-	}
-
-	.menu-item:focus-visible {
-		color: light-dark(var(--tmtGray-900), var(--tmtGray-300));
-	}
-</style>
