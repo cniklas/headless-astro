@@ -46,21 +46,21 @@ export const getAllExceptHomePage = async () => {
 
 export const getCalendarPage = (slug: string) => CALENDAR_PAGES.find(page => page.slug === slug) as CalendarPage
 
-export const buildNavigation: () => Promise<(ContentPage | CalendarPage)[]> = async () => {
+export const buildNavigation = async () => {
 	const _pages = await _getPages()
 	return [..._pages, ...CALENDAR_PAGES]
 }
 
-const _processContent = (page: Pick<KirbyPage, 'renderedContent' | 'tableData'>) => {
-	if (!page.tableData) return page.renderedContent
+const _processContent = ({ tableData, renderedContent }: Pick<KirbyPage, 'renderedContent' | 'tableData'>) => {
+	if (!tableData) return renderedContent
 
-	const columnLabels = page.tableData.headers.map(data => data.trim())
-	const tableHeader = page.tableData.headers
+	const columnLabels = tableData.headers.map(data => data.trim())
+	const tableHeader = tableData.headers
 		// a11y: table headers should not comtain empty `<th>` elements
 		.map(data => (data ? `<th scope="col">${data.trim()}</th>` : '<td></td>'))
 		.join(' ')
 
-	const tableBody = page.tableData.rows
+	const tableBody = tableData.rows
 		.map(row => {
 			const cells = row
 				.map((data, i) => {
@@ -74,7 +74,7 @@ const _processContent = (page: Pick<KirbyPage, 'renderedContent' | 'tableData'>)
 		.join(' ')
 
 	return `
-		${page.renderedContent}
+		${renderedContent}
 
 		<div class="table-wrapper">
 			<table>
