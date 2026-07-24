@@ -1,6 +1,6 @@
 minimumReleaseAge: 4320 # wait 3 days before new releases can be installed
 blockExoticSubdeps: true # block transitive deps from git/file/tarball sources
 strictDepBuilds: true # fail install unless build scripts are handled explicitly
-onlyBuiltDependencies:
-  - esbuild
-  - sharp
+allowBuilds:
+  esbuild: true
+  sharp: true
