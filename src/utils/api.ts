@@ -19,11 +19,12 @@ const _getPages = async () => {
 	if (pages.length) return pages
 
 	const response = await _fetchFromKirby()
-	response.forEach(({ modified, order, renderedContent, slug, tableData, title }, i) => {
+	response.forEach(({ lastEditor, modified, order, renderedContent, slug, tableData, title }, i) => {
 		pages.push({
 			title,
 			content: _processContent({ tableData, renderedContent }),
 			modified: formatDate(modified),
+			lastEditor,
 			order,
 			slug: i === 0 ? '' : slug,
 			isHome: i === 0,

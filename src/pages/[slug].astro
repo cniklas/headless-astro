@@ -11,7 +11,7 @@ export async function getStaticPaths() {
 }
 
 const { page } = Astro.props
-const { slug, title, modified, content } = page
+const { slug, title, modified, lastEditor, content } = page
 ---
 
 <Layout {slug} {title} footer>
@@ -21,6 +21,7 @@ const { slug, title, modified, content } = page
 		</h1>
 		<div class="content-update">
 			aktualisiert am {modified}
+			{lastEditor && ` von ${lastEditor}`}
 		</div>
 
 		<div id="content" class="pt-9 pb-6 lg:pt-10" set:html={content} />
