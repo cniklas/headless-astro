@@ -3,7 +3,7 @@ import Layout from '@/layouts/Layout.astro'
 import { getHomePage } from '@/utils/api'
 
 const page = await getHomePage()
-const { slug, title, modified, content } = page
+const { slug, title, modified, lastEditor, content } = page
 ---
 
 <Layout home {slug} {title} footer>
@@ -13,6 +13,7 @@ const { slug, title, modified, content } = page
 		</h1>
 		<div class="content-update">
 			aktualisiert am {modified}
+			{lastEditor && ` von ${lastEditor}`}
 		</div>
 
 		<div id="content" class="pt-9 pb-6 lg:pt-10" set:html={content} />

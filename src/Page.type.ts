@@ -1,5 +1,6 @@
 export type KirbyPage = {
 	id: string
+	lastEditor: string | null
 	modified: string
 	order: number | null
 	renderedContent: string
@@ -11,7 +12,7 @@ export type KirbyPage = {
 	title: string
 }
 
-export type ContentPage = Pick<KirbyPage, 'modified' | 'order' | 'slug' | 'title'> & {
+export type ContentPage = Pick<KirbyPage, 'lastEditor' | 'modified' | 'order' | 'slug' | 'title'> & {
 	content: string
 	isHome: boolean
 }
