@@ -16,9 +16,3 @@ export type ContentPage = Pick<KirbyPage, 'lastEditor' | 'modified' | 'order' | 
 	content: string
 	isHome: boolean
 }
-
-export type CalendarPage = {
-	isHome: false
-	slug: string
-	title: string
-}
