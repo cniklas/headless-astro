@@ -63,6 +63,9 @@ const _processContent = ({ tableData, renderedContent }: Pick<KirbyPage, 'render
 		.map(row => {
 			const cells = row
 				.map((data, i) => {
+					// replace three hyphens with an em dash like WordPress does
+					if (data === '---') data = '—'
+
 					const label = columnLabels.at(i)
 					if (!label) return `<th scope="row">${data}</th>`
 					return `<td data-th="${label}">${data}</td>`
