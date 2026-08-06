@@ -1,6 +1,6 @@
 ---
 import Layout from '@/layouts/Layout.astro'
-import { getHomePage } from '@/utils/api'
+import { getHomePage } from '@/api'
 
 const page = await getHomePage()
 const { slug, title, modified, lastEditor, content } = page

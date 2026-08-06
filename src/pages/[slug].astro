@@ -1,6 +1,6 @@
 ---
 import Layout from '@/layouts/Layout.astro'
-import { getAllExceptHomePage } from '@/utils/api'
+import { getAllExceptHomePage } from '@/api'
 
 export async function getStaticPaths() {
 	const pages = await getAllExceptHomePage()
