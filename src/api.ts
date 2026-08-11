@@ -2,9 +2,8 @@ import { KIRBY_URL } from 'astro:env/server'
 import { formatDate } from './dateTime'
 import type { KirbyPage, ContentPage } from '@/Page.type'
 
-const REST_URL = `${KIRBY_URL}/headless`
 const _fetchFromKirby = async (query = 'pages'): Promise<KirbyPage[]> => {
-	const response = await fetch(`${REST_URL}/${query}`)
+	const response = await fetch(`${KIRBY_URL}/headless/${query}`)
 	if (response.ok) return response.json()
 
 	const error = await response.json()
@@ -43,7 +42,7 @@ export const getAllExceptHomePage = async () => {
 }
 
 const CALENDAR_PAGES = { ton: { title: 'Ton', slug: 'ton', isHome: false } } as const
-export const getCalendarPage = (slug: keyof typeof CALENDAR_PAGES) => CALENDAR_PAGES[slug]
+export const getCalendarPage = (key: keyof typeof CALENDAR_PAGES) => CALENDAR_PAGES[key]
 
 export const buildNavigation = async () => {
 	const _pages = await _getPages()
