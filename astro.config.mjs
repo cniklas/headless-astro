@@ -13,4 +13,6 @@ export default defineConfig({
 			SITE_TITLE: envField.string({ context: 'server', access: 'public' }),
 		},
 	},
+	// https://docs.astro.build/en/guides/upgrade-to/v7/#new-default-whitespace-handling-compresshtml-jsx
+	compressHTML: true,
 })
