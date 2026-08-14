@@ -2,12 +2,29 @@ import { KIRBY_URL } from 'astro:env/server'
 import { formatDate } from './dateTime'
 import type { KirbyPage, ContentPage } from '@/Page.type'
 
-const _fetchFromKirby = async (query = 'pages'): Promise<KirbyPage[]> => {
-	const response = await fetch(`${KIRBY_URL}/headless/${query}`)
-	if (response.ok) return response.json()
+const ERROR_PAGE: KirbyPage = {
+	id: 'error',
+	lastEditor: null,
+	modified: new Date().toISOString(),
+	order: null,
+	renderedContent: '',
+	slug: 'error',
+	tableData: null,
+	title: 'Error',
+}
 
-	const error = await response.json()
-	throw new Error(`❗ Failed to fetch API for ${query}\nCode: ${error.code}\nMessage: ${error.message}\n`)
+const _fetchFromKirby = async (query = 'pages'): Promise<KirbyPage[]> => {
+	try {
+		const response = await fetch(`${KIRBY_URL}/headless/${query}`)
+		if (response.ok) return response.json()
+
+		throw new Error('❌ Failed to fetch Kirby API', { cause: response })
+	} catch (error) {
+		console.error(error)
+
+		const { cause } = error as { cause: Response }
+		return [{ ...ERROR_PAGE, title: `${cause.status} ${cause.statusText}` }]
+	}
 }
 
 const pages: ContentPage[] = []
