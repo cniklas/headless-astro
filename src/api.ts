@@ -39,7 +39,7 @@ const _getPages = async () => {
 			modified: formatDate(modified),
 			lastEditor,
 			order,
-			slug: i === 0 ? '' : slug,
+			slug: i === 0 ? '/' : slug,
 			isHome: i === 0,
 		})
 	})
