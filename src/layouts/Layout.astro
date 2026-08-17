@@ -17,11 +17,12 @@ const { home = false, slug, title, footer = false } = Astro.props
 	<!-- prettier-ignore -->
 	<head>
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width">
+	<meta name="text-scale" content="scale">
 	<title>{home ? SITE_TITLE : `${title} - ${SITE_TITLE}`}</title>
 
 	<meta name="robots" content="noindex, nofollow">
-	<link rel="icon" type="image/x-icon" href="/favicon.ico">
+	<link rel="icon" href="/favicon.ico">
 </head>
 
 	<body>
