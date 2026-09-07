@@ -16,16 +16,6 @@ const { slug, title, modified, lastEditor, content } = page
 			{lastEditor && <span class="inline-block">von {lastEditor}</span>}
 		</div>
 
-		<div id="content" class="pt-9 pb-6 lg:pt-10" set:html={content} />
-
-		<div class="flex justify-center py-6">
-			<img
-				src="https://api.netlify.com/api/v1/badges/13a06c8c-d55d-455c-ba19-e24dcc607c53/deploy-status"
-				width="118"
-				height="20"
-				alt=""
-				loading="lazy"
-			/>
-		</div>
+		<div id="content" class="mt-9 lg:mt-10" set:html={content} />
 	</div>
 </Layout>

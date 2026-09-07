@@ -21,9 +21,9 @@ const { slug, title, modified, lastEditor, content } = page
 		</h1>
 		<div class="content-update">
 			aktualisiert am {modified}
-			{lastEditor && ` von ${lastEditor}`}
+			{lastEditor && <span class="inline-block">von {lastEditor}</span>}
 		</div>
 
-		<div id="content" class="pt-9 pb-6 lg:pt-10" set:html={content} />
+		<div id="content" class="mt-9 lg:mt-10" set:html={content} />
 	</div>
 </Layout>

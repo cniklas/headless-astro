@@ -115,13 +115,18 @@ body {
 	}
 }
 
+.main {
+	@apply mt-20 max-w-7xl lg:mt-4;
+	margin-inline: auto;
+}
+
 .content-wrapper {
-	@apply px-4;
+	@apply flow-root px-4;
 	color: light-dark(var(--tmtGray-800), var(--tmtGray-400));
 }
 
 .content-title {
-	@apply <lg:break-words pt-3 pb-1 text-center text-3xl/normal font-bold text-balance md:pb-2 md:text-4xl/normal lg:pt-6 dark:font-semibold;
+	@apply <lg:break-words mt-3 mb-1 text-center text-3xl/normal font-bold text-balance md:mb-2 md:text-4xl/normal lg:mt-6 dark:font-semibold;
 	color: light-dark(var(--tmtGray-900), var(--tmtGray-300));
 }
 
@@ -231,22 +236,6 @@ td a {
 	}
 }
 
-.calendar-full-height {
-	height: calc(100dvh - 5rem);
-
-	@media (min-width: 64em) {
-		height: calc(100dvh - 7.5rem);
-	}
-}
-
-:where(#content) > p:not(:empty) {
-	@apply mb-6;
-}
-
-:where(#content) .has-text-align-center {
-	text-align: center;
-}
-
 /* Dark Mode < 1024 */
 @media (prefers-color-scheme: dark) and (max-width: 63.9375em) {
 	tbody tr {
@@ -261,4 +250,25 @@ td a {
 		color: var(--tmtGray-300);
 		font-weight: 500;
 	}
+}
+
+.google-calendar {
+	display: block;
+	width: 100%;
+	height: calc(100dvh - 5rem);
+
+	@media (min-width: 64em) {
+		height: calc(100dvh - 7.5rem);
+	}
+}
+
+:where(#content) > p:not(:empty) {
+	@apply mb-6;
+}
+
+.footer {
+	@apply mt-12 gap-y-4 pb-6;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
