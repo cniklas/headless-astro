@@ -18,11 +18,11 @@
     "astro": "^7.3.1"
   },
   "devDependencies": {
-    "@unocss/astro": "^66.7.5",
-    "@unocss/reset": "^66.7.5",
+    "@unocss/astro": "^66.10.0",
+    "@unocss/reset": "^66.10.0",
     "prettier-plugin-astro": "^0.14.1",
     "prettier-plugin-tailwindcss": "^0.8.1",
-    "unocss": "^66.7.5"
+    "unocss": "^66.10.0"
   },
   "engines": {
     "node": ">=22.12.0"
