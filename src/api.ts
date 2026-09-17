@@ -18,12 +18,12 @@ const _fetchFromKirby = async (query = 'pages'): Promise<KirbyPage[]> => {
 		const response = await fetch(`${KIRBY_URL}/headless/${query}`)
 		if (response.ok) return response.json()
 
-		throw new Error('❌ Failed to fetch Kirby API', { cause: response })
+		// API ist erreichbar, hat aber mit einem Fehler geantwortet
+		return [{ ...ERROR_PAGE, title: `${response.status} ${response.statusText}` }]
 	} catch (error) {
-		console.error(error)
-
-		const { cause } = error as { cause: Response }
-		return [{ ...ERROR_PAGE, title: `${cause.status} ${cause.statusText}` }]
+		// kein HTTP-Response vorhanden: DNS, Timeout, Connection refused etc.
+		console.error('❌ Failed to connect to Kirby API', error)
+		throw error
 	}
 }
 
