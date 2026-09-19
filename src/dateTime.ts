@@ -1,7 +1,7 @@
 const dateFormatter = new Intl.DateTimeFormat('de', {
-	// year: 'numeric',
-	month: 'long',
 	day: 'numeric',
+	month: 'short',
+	// year: 'numeric',
 })
 
 const timeFormatter = new Intl.DateTimeFormat('de', {
