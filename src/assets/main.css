@@ -25,6 +25,11 @@ body {
 	background-color: light-dark(var(--tmtGray-100), oklch(17.25% 0.0165 284.53));
 }
 
+/* https://dbushell.com/2024/03/10/css-button-styles-you-might-not-know/#touch-actions */
+:is(button, label, input, select, textarea, summary) {
+	touch-action: manipulation;
+}
+
 .header {
 	@apply fixed top-0 z-10 w-full lg:static;
 	background-color: white;
