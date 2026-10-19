@@ -70,7 +70,7 @@ body {
 	}
 }
 
-@media not all and (min-width: 64em) {
+@media (width < 64em) {
 	/* https://nemzes.net/posts/animating-height-auto/ */
 	.nav {
 		--duration: 240ms;
@@ -194,7 +194,7 @@ td a {
 }
 
 /* < 1024 */
-@media not all and (min-width: 64em) {
+@media (width < 64em) {
 	table {
 		overflow: clip;
 	}
@@ -209,7 +209,8 @@ td a {
 	}
 
 	tbody td {
-		@apply grid grid-cols-[min(calc(40%-0.625rem),9.375rem)_1fr] gap-x-2.5;
+		@apply grid gap-x-2.5;
+		grid-template-columns: min(calc(40% - 0.625rem), 9.375rem) 1fr;
 	}
 
 	tbody td[data-th]::before {
@@ -217,9 +218,9 @@ td a {
 		@apply overflow-clip font-semibold text-ellipsis;
 	}
 
+	/* tbody td:empty */
 	thead,
-	tfoot,
-	tbody td:empty {
+	tfoot {
 		display: none;
 	}
 
