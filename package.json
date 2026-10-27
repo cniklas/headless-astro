@@ -15,14 +15,14 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
-    "astro": "^7.4.0"
+    "astro": "^7.4.2"
   },
   "devDependencies": {
-    "@unocss/astro": "^66.10.5",
-    "@unocss/reset": "^66.10.5",
-    "prettier-plugin-astro": "^1.1.0",
+    "@unocss/astro": "^66.11.0",
+    "@unocss/reset": "^66.11.0",
+    "prettier-plugin-astro": "^1.1.2",
     "prettier-plugin-tailwindcss": "^0.8.1",
-    "unocss": "^66.10.5"
+    "unocss": "^66.11.0"
   },
   "engines": {
     "node": ">=22.12.0"
