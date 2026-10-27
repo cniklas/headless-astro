@@ -45,6 +45,17 @@ const _getPages = async () => {
 	})
 	// pages.sort((a, b) => (a.isHome ? -1 : b.isHome ? 1 : (a.order ?? Infinity) - (b.order ?? Infinity)))
 
+	if (!pages.length)
+		pages.push({
+			title: 'Keine Inhalte gefunden',
+			content: '',
+			modified: formatDate(new Date().toISOString()),
+			lastEditor: null,
+			order: null,
+			slug: '/',
+			isHome: true,
+		})
+
 	return pages
 }
 
